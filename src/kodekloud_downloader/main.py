@@ -173,23 +173,12 @@ def create_file_path(
     lesson_index: int,
     lesson_name: str,
 ) -> Path:
-    """
-    Create a file path for a lesson.
-
-    :param output_dir: The output directory for the downloaded course
-    :param course_name: The course name
-    :param module_index: The module index
-    :param item_name: The module name
-    :param lesson_index: The lesson index
-    :param lesson_name: The lesson name
-    :return: The created file path
-    """
     return Path(
         Path(output_dir)
         / "KodeKloud"
-        / normalize_name(course_name)
-        / f"{module_index} - {normalize_name(module_name)}"
-        / f"{lesson_index} - {normalize_name(lesson_name)}"
+        / normalize_name(course_name).strip()
+        / f"{module_index} - {normalize_name(module_name).strip()}"
+        / f"{lesson_index} - {normalize_name(lesson_name).strip()}"
     )
 
 
@@ -208,12 +197,14 @@ def download_video_lesson(
     file_path.parent.mkdir(parents=True, exist_ok=True)
     logger.info(f"Parsing url: {lesson_video_url}")
     try:
-        download_video(
-            url=lesson_video_url,
-            output_path=file_path,
-            cookie=cookie,
-            quality=quality,
-        )
+        #download_video(
+        #    url=lesson_video_url,
+        #    output_path=file_path,
+        #    cookie=cookie,
+        #    quality=quality,
+        #)
+        with open(file_path,'w') as f:
+            f.write(lesson_video_url)
     except yt_dlp.utils.UnsupportedError as ex:
         logger.error(
             f"Could not download video in link {lesson_video_url}. "
