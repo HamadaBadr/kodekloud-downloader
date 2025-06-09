@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "kodekloud-downloader"
-version = "0.1.0"
+version = "0.1.4"
 description = "Simple downloaded for https://kodekloud.com/"
 readme = "README.md"
 authors = ["Roy, Debakar <debakar.roy@outlook.com>"]
